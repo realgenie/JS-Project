@@ -53,8 +53,8 @@ function onDocumentMouseDown() {
 
 function animate() {
     requestAnimationFrame(animate); 
-    //doggy.object.rotation.x += 0.01; 
-    //doggy.object.rotation.y += 0.01;
+    doggy.object.rotation.x += 0.01; 
+    doggy.object.rotation.y += 0.01;
     renderer.render(scene, camera);
 };
 animate();
