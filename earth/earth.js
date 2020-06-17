@@ -23,7 +23,7 @@ scene.add(light);
 
 var star = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('starfield.png'),
-    geometry = new THREE.SphereGeometry(15, 64, 64), 
+    geometry = new THREE.SphereGeometry(90, 64, 64), 
     material = new THREE.MeshBasicMaterial(
         {
             map: texture,
@@ -33,6 +33,9 @@ var star = new THREE.Mesh(
 );
 var star = new THREE.Mesh(geometry, material)
 scene.add(star);
+
+
+
 
 var earth = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('earthmap1k.jpg'),
@@ -53,15 +56,30 @@ scene.add(earth);
 
 
 
+var clouds = new THREE.Mesh(
+    texture = new THREE.TextureLoader().load('earthmapcloudmap.jpg'),
+    cloudGeometry = new THREE.SphereGeometry(3,  32, 32),
+    cloudMaterial = new THREE.MeshPhongMaterial(
+        {
+            map: texture,
+            transparent: true,
+            opacity: 50
+        }
+    )
+)
+var clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
+scene.add(clouds);
+
+
+
+
 
 
 
 
 function animate() {
     requestAnimationFrame(animate); 
-    earth.rotation.x += 0.0005;
-    earth.rotation.y += 0.0005;
-    controls.update();
+    earth.rotation.y -= 0.0005;
     renderer.render(scene, camera);
 };
 animate();
