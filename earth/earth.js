@@ -21,7 +21,18 @@ light.position.set(50,0,200);
 scene.add(light);
 
 
-
+var star = new THREE.Mesh(
+    texture = new THREE.TextureLoader().load('starfield.png'),
+    geometry = new THREE.SphereGeometry(15, 64, 64), 
+    material = new THREE.MeshBasicMaterial(
+        {
+            map: texture,
+            side: THREE.BackSide
+        }
+    )
+);
+var star = new THREE.Mesh(geometry, material)
+scene.add(star);
 
 var earth = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('earthmap1k.jpg'),
@@ -45,8 +56,12 @@ scene.add(earth);
 
 
 
+
 function animate() {
     requestAnimationFrame(animate); 
+    earth.rotation.x += 0.0005;
+    earth.rotation.y += 0.0005;
+    controls.update();
     renderer.render(scene, camera);
 };
 animate();
