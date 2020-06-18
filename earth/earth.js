@@ -10,29 +10,17 @@ document.body.appendChild( renderer.domElement );
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.update();
 
-
-var spotLight = new THREE.DirectionalLight(0xffffff);
-spotLight.position.set(-40,0,0);
-scene.add(spotLight);
-
-
-var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(-40,0,0);
-
-scene.add( directionalLight);
-
-var ambientLight = new THREE.AmbientLight(0x333333, 0.5);
+var ambientLight = new THREE.AmbientLight(0x404040);
 scene.add(ambientLight);
-
 
 
 var star = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('starfield.png'),
-    geometry = new THREE.SphereGeometry(1000, 0, 50), 
+    geometry = new THREE.SphereGeometry(1000, 3, 3), 
     material = new THREE.MeshBasicMaterial(
         {
             map: texture,
-            side: THREE.BackSide
+            side: THREE.DoubleSide
         }
     )
 );
@@ -55,12 +43,7 @@ var earth = new THREE.Mesh(
     )
 );
 var earth = new THREE.Mesh(geometry, material)
-//earth.position.set(0,0,0);
 scene.add(earth);
-
-//var earth = new THREE.Object3D();
-
-
 
 var clouds = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('earthcloudmaptrans.jpg'),
@@ -85,7 +68,7 @@ var sun = new THREE.Mesh(
     material = new THREE.MeshPhongMaterial(
         {
             map: texture,
-            shininess: 10
+            shininess: 1000
         }
     )
 );
@@ -107,7 +90,7 @@ var moon = new THREE.Mesh(
     )
 );
 var moon = new THREE.Mesh(geometry, material)
-moon.position.set(50,0,0);
+moon.position.set(40,0,0);
 scene.add(moon);
 
 var earthVec = new THREE.Vector3(0,0,0);
@@ -130,10 +113,9 @@ function animate() {
     moon.position.x = r * Math.cos(theta);
     moon.position.z = r * Math.sin(theta);
 
-
-      //camera.position.x += dx;
-      //camera.position.y += dy;
-      //camera.position.z += dz;
+      camera.position.x += dx;
+      camera.position.y += dy;
+      camera.position.z += dz;
 
       camera.lookAt(earthVec);
 
