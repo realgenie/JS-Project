@@ -1,7 +1,7 @@
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 scene.add(camera); //add?
-camera.position.set(-90, 0, 90);
+camera.position.set(90, 0, 0);
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -16,7 +16,7 @@ scene.add(ambientLight);
 
 var star = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('starfield.png'),
-    geometry = new THREE.SphereGeometry(1000, 3, 3), 
+    geometry = new THREE.SphereGeometry(1000, 1, 1), 
     material = new THREE.MeshBasicMaterial(
         {
             map: texture,
@@ -31,7 +31,7 @@ var earth = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('earthmap1k.jpg'),
     bump = new THREE.TextureLoader().load('earthbump1k.jpg'),
     spec = new THREE.TextureLoader().load('earthspec1k.jpg'),
-    geometry = new THREE.SphereGeometry(8, 50, 50),
+    geometry = new THREE.SphereGeometry(10, 50, 50),
     material = new THREE.MeshPhongMaterial(
         {
             map: texture,
@@ -47,7 +47,7 @@ scene.add(earth);
 
 var clouds = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('earthcloudmaptrans.jpg'),
-    cloudGeometry = new THREE.SphereGeometry(8.09, 50, 50),
+    cloudGeometry = new THREE.SphereGeometry(10.09, 50, 50),
     cloudMaterial = new THREE.MeshPhongMaterial(
         {
             map: texture,
@@ -64,7 +64,7 @@ earth.add(clouds);
 
 var sun = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('sunmap.jpg'),
-    geometry = new THREE.SphereGeometry(5, 50, 50),
+    geometry = new THREE.SphereGeometry(20, 50, 50),
     material = new THREE.MeshPhongMaterial(
         {
             map: texture,
@@ -73,13 +73,13 @@ var sun = new THREE.Mesh(
     )
 );
 var sun = new THREE.Mesh(geometry, material)
-sun.position.set(-40,0,0);
+sun.position.set(-90,0,0);
 scene.add(sun);
 
 var moon = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('moon_texture.jpg'),
     bump = new THREE.TextureLoader().load('moonbump1k.jpg'),
-    geometry = new THREE.SphereGeometry(3, 50, 50),
+    geometry = new THREE.SphereGeometry(3.5, 50, 50),
     material = new THREE.MeshPhongMaterial(
         {
             map: texture,
