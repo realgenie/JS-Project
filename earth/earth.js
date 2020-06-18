@@ -14,12 +14,9 @@ var ambientLight = new THREE.AmbientLight(0x404040);
 scene.add(ambientLight);
 
 
-var light = new THREE.DirectionalLight(0xffffff, 3);
+var light = new THREE.DirectionalLight(0xffffff, 2);
 light.position.set(-90,0,0);
 scene.add(light);
-
-
-
 
 var star = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('starfield.png'),
@@ -82,6 +79,11 @@ var sun = new THREE.Mesh(
 var sun = new THREE.Mesh(geometry, material)
 sun.position.set(-90,0,0);
 scene.add(sun);
+
+var sun = new THREE.Object3D();
+scene.add(sun);
+
+light.target = sun;
 
 var moon = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('moon_texture.jpg'),
