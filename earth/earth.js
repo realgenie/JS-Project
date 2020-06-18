@@ -13,11 +13,9 @@ controls.update();
 var ambientLight = new THREE.AmbientLight(0x404040);
 scene.add(ambientLight);
 
-var light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(90,0,0);
-scene.add(light);
-
-
+var light = new THREE.PointLight( 0xffffff);
+light.position.set( 0, 0, 0 );
+scene.add( light );
 
 var star = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('starfield.png'),
@@ -36,7 +34,7 @@ var earth = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('earthmap1k.jpg'),
     bump = new THREE.TextureLoader().load('earthbump1k.jpg'),
     spec = new THREE.TextureLoader().load('earthspec1k.jpg'),
-    geometry = new THREE.SphereGeometry(10, 50, 50),
+    geometry = new THREE.SphereGeometry(5, 50, 50),
     material = new THREE.MeshPhongMaterial(
         {
             map: texture,
@@ -48,11 +46,12 @@ var earth = new THREE.Mesh(
     )
 );
 var earth = new THREE.Mesh(geometry, material)
+earth.position.set(0,0,0);
 scene.add(earth);
 
 var clouds = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('earthcloudmaptrans.jpg'),
-    cloudGeometry = new THREE.SphereGeometry(10.09, 50, 50),
+    cloudGeometry = new THREE.SphereGeometry(5.09, 50, 50),
     cloudMaterial = new THREE.MeshPhongMaterial(
         {
             map: texture,
@@ -68,44 +67,26 @@ var clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
 earth.add(clouds);
 
 var sun = new THREE.Mesh(
-    texture = new THREE.TextureLoader().load('sunmap.jpg'),
-    geometry = new THREE.SphereGeometry(20, 50, 50),
+    texture = new THREE.TextureLoader().load('sol.jpg'),
+    geometry = new THREE.SphereGeometry(15, 50, 50),
     material = new THREE.MeshPhongMaterial(
         {
             map: texture,
-            shininess: 1000
+            shininess: 5,
+            emissive: 0xf9521f
+            //0xf9521f
+            //0xdd8c43 
+
         }
     )
 );
 var sun = new THREE.Mesh(geometry, material)
-sun.position.set(90,0,0);
 scene.add(sun);
 
-var sun = new THREE.Object3D();
-scene.add(sun);
 
-light.target = sun;
+var sunVec = new THREE.Vector3(0,0,0);
 
-var moon = new THREE.Mesh(
-    texture = new THREE.TextureLoader().load('moon_texture.jpg'),
-    bump = new THREE.TextureLoader().load('moonbump1k.jpg'),
-    geometry = new THREE.SphereGeometry(3.5, 50, 50),
-    material = new THREE.MeshPhongMaterial(
-        {
-            map: texture,
-            bumpMap: bump,
-            bumpScale: 0.08,
-         
-        }
-    )
-);
-var moon = new THREE.Mesh(geometry, material)
-moon.position.set(40,0,0);
-scene.add(moon);
-
-var earthVec = new THREE.Vector3(0,0,0);
-
-var r = 20;
+var r = 50;
 var theta = 0;
 var dTheta = 2 * Math.PI / 1000;
 
@@ -120,20 +101,20 @@ function animate() {
     clouds.rotation.y -= 0.005
       
     theta += dTheta;
-    moon.position.x = r * Math.cos(theta);
-    moon.position.z = r * Math.sin(theta);
+    earth.position.x = r * Math.cos(theta);
+    earth.position.z = r * Math.sin(theta);
 
       camera.position.x += dx;
       camera.position.y += dy;
       camera.position.z += dz;
 
-      camera.lookAt(earthVec);
+      camera.lookAt(sunVec);
 
       if (camera.position.z < -100) {
         camera.position.set(0,35,70);
       }
 
-      camera.lookAt(earthVec);
+      camera.lookAt(sunVec);
 
     renderer.render(scene, camera);
 };
