@@ -1,7 +1,7 @@
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 scene.add(camera); //add?
-camera.position.set(0, 35, 70);
+camera.position.set(-90, 0, 90);
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -11,21 +11,24 @@ var controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.update();
 
 
-
 var spotLight = new THREE.DirectionalLight(0xffffff);
-spotLight.position.set(50,50,50);
+spotLight.position.set(-40,0,0);
 scene.add(spotLight);
 
-var directionalLight = new THREE.DirectionalLight( 0xffffff);
-directionalLight.position.set(50,50,50);
-scene.add( directionalLight );
 
-var ambientLight = new THREE.AmbientLight(0x333333);
+var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(-40,0,0);
+
+scene.add( directionalLight);
+
+var ambientLight = new THREE.AmbientLight(0x333333, 0.5);
 scene.add(ambientLight);
+
+
 
 var star = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('starfield.png'),
-    geometry = new THREE.SphereGeometry(50, 50, 50), 
+    geometry = new THREE.SphereGeometry(1000, 0, 50), 
     material = new THREE.MeshBasicMaterial(
         {
             map: texture,
@@ -52,7 +55,10 @@ var earth = new THREE.Mesh(
     )
 );
 var earth = new THREE.Mesh(geometry, material)
+//earth.position.set(0,0,0);
 scene.add(earth);
+
+//var earth = new THREE.Object3D();
 
 
 
@@ -70,6 +76,7 @@ var clouds = new THREE.Mesh(
     )
 )
 var clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
+
 earth.add(clouds);
 
 var sun = new THREE.Mesh(
@@ -78,7 +85,7 @@ var sun = new THREE.Mesh(
     material = new THREE.MeshPhongMaterial(
         {
             map: texture,
-            shininess: 3
+            shininess: 10
         }
     )
 );
@@ -100,12 +107,12 @@ var moon = new THREE.Mesh(
     )
 );
 var moon = new THREE.Mesh(geometry, material)
-moon.position.set(35,0,0);
+moon.position.set(50,0,0);
 scene.add(moon);
 
 var earthVec = new THREE.Vector3(0,0,0);
 
-var r = 30;
+var r = 20;
 var theta = 0;
 var dTheta = 2 * Math.PI / 1000;
 
@@ -123,12 +130,10 @@ function animate() {
     moon.position.x = r * Math.cos(theta);
     moon.position.z = r * Math.sin(theta);
 
-    if (camera.position.z < 0) {
-        dx *= -1;
-      }
-      camera.position.x += dx;
-      camera.position.y += dy;
-      camera.position.z += dz;
+
+      //camera.position.x += dx;
+      //camera.position.y += dy;
+      //camera.position.z += dz;
 
       camera.lookAt(earthVec);
 
