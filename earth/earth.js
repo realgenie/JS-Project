@@ -13,9 +13,13 @@ controls.update();
 var ambientLight = new THREE.AmbientLight(0x404040);
 scene.add(ambientLight);
 
-var light = new THREE.PointLight(0xffffff, 3);
-light.position.set(-90, 0, 0);
-scene.add( light );
+
+var light = new THREE.DirectionalLight(0xffffff, 3);
+light.position.set(-90,0,0);
+scene.add(light);
+
+
+
 
 var star = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('starfield.png'),
