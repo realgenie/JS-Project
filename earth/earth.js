@@ -1,7 +1,7 @@
   
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 35, 70);
+camera.position.set(150, 150, 150);
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -20,7 +20,7 @@ scene.add(ambientLight);
 
 var light = new THREE.SpotLight(0xffffff, 0.5);
 light.position.set(50,0,200);
-scene.add(light);
+//scene.add(light);
 
 
 var star = new THREE.Mesh(
@@ -77,7 +77,7 @@ var sun = new THREE.Mesh(
     material = new THREE.MeshPhongMaterial(
         {
             map: texture,
-            shininess: 2
+            shininess: 3
         }
     )
 );
