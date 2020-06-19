@@ -1,6 +1,6 @@
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.set( 90, 20, 0 );
+camera.position.set( -90, 0, 90 );
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -96,7 +96,7 @@ moon.position.set( 40, 0, 0 );
 scene.add(moon);
 
 var sunVec = new THREE.Vector3( 0, 0, 0 )
-var earthVec = new THREE.Vector3( 0, 0, 0 )
+//var earthVec = new THREE.Vector3( 0, 1, 0 )
 
 var theta = 0;
 var dTheta = 2 * Math.PI / 1000;
@@ -107,22 +107,23 @@ var dz = -0.05;
 
 function animate() {
     requestAnimationFrame(animate); 
-    earth.rotation.y += 0.06;
+    earth.rotation.y -= 0.06;
     clouds.rotation.y -= 0.05;
-      
-    theta += dTheta;
+    
+    
+    theta -= dTheta;
     earth.position.x = 60 * Math.cos(theta);
     earth.position.z = 60 * Math.sin(theta);
 
-    moon.position.x = 45 * Math.cos(theta) + 30 * Math.sin(theta);
-    moon.position.z = 45 * Math.sin(theta) + 30 * Math.cos(theta);
+    moon.position.x = 55 * Math.cos(theta) + 25 * Math.sin(theta);
+    moon.position.z = 55 * Math.sin(theta) + 25 * Math.cos(theta);
 
     camera.position.x += dx;
     camera.position.y += dy;
     camera.position.z += dz;
 
     camera.lookAt(sunVec);
-    camera.lookAt(earthVec);
+    //camera.lookAt(earthVec);
 
     renderer.render( scene, camera );
 };
