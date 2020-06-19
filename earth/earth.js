@@ -45,7 +45,7 @@ var earth = new THREE.Mesh(
     )
 );
 var earth = new THREE.Mesh( geometry, material )
-earth.position.set( 0, 0, 0) ;
+earth.position.set( 30, 0, 0 ) ;
 scene.add(earth);
 
 var clouds = new THREE.Mesh(
