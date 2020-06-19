@@ -96,7 +96,6 @@ moon.position.set( 40, 0, 0 );
 scene.add(moon);
 
 var sunVec = new THREE.Vector3( 0, 0, 0 )
-//var earthVec = new THREE.Vector3( 0, 1, 0 )
 
 var theta = 0;
 var dTheta = 2 * Math.PI / 1000;
@@ -110,7 +109,6 @@ function animate() {
     earth.rotation.y -= 0.06;
     clouds.rotation.y -= 0.05;
     
-    
     theta -= dTheta;
     earth.position.x = 60 * Math.cos(theta);
     earth.position.z = 60 * Math.sin(theta);
@@ -123,7 +121,6 @@ function animate() {
     camera.position.z += dz;
 
     camera.lookAt(sunVec);
-    //camera.lookAt(earthVec);
 
     renderer.render( scene, camera );
 };
