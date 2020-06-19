@@ -30,9 +30,9 @@ var star = new THREE.Mesh( geometry, material )
 scene.add(star);
 
 var earth = new THREE.Mesh(
-    texture = new THREE.TextureLoader().load('earthmap1k.jpg'),
-    bump = new THREE.TextureLoader().load('earthbump1k.jpg'),
-    spec = new THREE.TextureLoader().load('earthspec1k.jpg'),
+    texture = new THREE.TextureLoader().load('earthmap.jpg'),
+    bump = new THREE.TextureLoader().load('earthbump.jpg'),
+    spec = new THREE.TextureLoader().load('earthspec.jpg'),
     geometry = new THREE.SphereGeometry( 6, 50, 50 ),
     material = new THREE.MeshPhongMaterial(
         {
@@ -80,7 +80,7 @@ scene.add(sun);
 
 var moon = new THREE.Mesh(
     texture = new THREE.TextureLoader().load('moon_texture.jpg'),
-    bump = new THREE.TextureLoader().load('moonbump1k.jpg'),
+    bump = new THREE.TextureLoader().load('moonbump.jpg'),
     geometry = new THREE.SphereGeometry( 3.5, 50, 50 ),
     material = new THREE.MeshPhongMaterial(
         {
